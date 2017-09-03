@@ -35,12 +35,12 @@ def to_auxiliary_matrix(gt_graph_file):
     plt.scatter(x_degree, y_column)
     plt.xscale('log')
     plt.yscale('log')
-    plt.margins(0.1)
+    plt.margins(0.2)
 
-    ax = plt.gca()
-    ax.relim()
-    # update ax.viewLim using the new dataLim
-    ax.autoscale_view()
+    # ax = plt.gca()
+    # ax.relim()
+    # # update ax.viewLim using the new dataLim
+    # ax.autoscale_view()
 
     plt.show()
 
