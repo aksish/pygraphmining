@@ -3,9 +3,10 @@ import os
 import matplotlib.pyplot as plt
 import numpy as np
 import networkx as nx
+import sys
 
 
-def to_auxiliary_matrix(gt_graph_file):
+def get_graph(gt_graph_file):
     data = np.loadtxt(gt_graph_file, dtype=int, skiprows=8, usecols=(1, 2))
     with open(gt_graph_file) as meta:
         print(meta.readline())
@@ -24,41 +25,35 @@ def to_auxiliary_matrix(gt_graph_file):
         col = item[1] - 1
         auxiliary[row, col] = 1
 
-    degree_count = np.sum(auxiliary, axis=0, dtype=int)
-
-    degree, count = np.unique(degree_count, return_counts=True)
-
-    x_degree = degree.flatten()
-    y_column = count.flatten()
-
-    plt.title(" Node Degree distribution of a R-Mat Graph n = " + str(nodes_count) + " m = " + str(edge_count))
-    plt.xlabel("Node degree")
-    plt.ylabel("Number of nodes")
-    # plt.plot(x_degree, y_column)
-    plt.scatter(x_degree, y_column)
-    plt.yscale('symlog')
-    plt.xscale('symlog')
-    #
-    plt.margins(0.2)
-
-    # ax = plt.gca()
-    # ax.relim()
-    # # update ax.viewLim using the new dataLim
-    # ax.autoscale_view()
-
-    plt.show()
+    save_degree_distribution(auxiliary, gt_graph_file + ".png", nodes_count, edge_count)
 
     return auxiliary
 
 
+def save_degree_distribution(auxiliary_matrix, image_file_name, nodes_count, edge_count):
+    degree_count = np.sum(auxiliary_matrix, axis=0, dtype=int)
+    degree, count = np.unique(degree_count, return_counts=True)
+    x_degree = degree.flatten()
+    y_column = count.flatten()
+    plt.title(" Node Degree distribution of a Graph n = " + str(nodes_count) + " m = " + str(edge_count))
+    plt.xlabel("Node degree")
+    plt.ylabel("Number of nodes")
+    plt.scatter(x_degree, y_column)
+    plt.yscale('symlog')
+    plt.xscale('symlog')
+    plt.margins(0.2)
+    plt.savefig(image_file_name)
+
+
+def draw_graph(auxiliary_matrix):
+    G = nx.from_numpy_matrix(auxiliary_matrix)
+    nx.draw_random(G, with_labels=True)
+    plt.show()
+
+
 def main():
     os.chdir("D:\Linux VM\shared")
-    auxiliary_matrix = to_auxiliary_matrix("Assignment2_qsn_3d_rmat.gh")
-
-    #Draws Graph
-    # G = nx.from_numpy_matrix(auxiliary_matrix)
-    # nx.draw_random(G, with_labels=True)
-    # plt.show()
+    get_graph(sys.argv[1])
 
 
 if __name__ == "__main__":
