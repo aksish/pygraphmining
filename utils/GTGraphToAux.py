@@ -24,9 +24,7 @@ def get_graph(gt_graph_file):
         row = item[0] - 1
         col = item[1] - 1
         auxiliary[row, col] = 1
-
     save_degree_distribution(auxiliary, gt_graph_file + ".png", nodes_count, edge_count)
-
     return auxiliary
 
 
@@ -35,7 +33,13 @@ def save_degree_distribution(auxiliary_matrix, image_file_name, nodes_count, edg
     degree, count = np.unique(degree_count, return_counts=True)
     x_degree = degree.flatten()
     y_column = count.flatten()
-    plt.title(" Node Degree distribution of a Graph n = " + str(nodes_count) + " m = " + str(edge_count))
+    title = " Node Degree distribution of a "
+    if "rmat" in image_file_name:
+        title += " R-Mat "
+    else:
+        title += " Random "
+    title += " Graph n = " + str(nodes_count) + " m = " + str(edge_count)
+    plt.title(title)
     plt.xlabel("Node degree")
     plt.ylabel("Number of nodes")
     plt.scatter(x_degree, y_column)
@@ -43,6 +47,7 @@ def save_degree_distribution(auxiliary_matrix, image_file_name, nodes_count, edg
     plt.xscale('symlog')
     plt.margins(0.2)
     plt.savefig(image_file_name)
+    plt.close()
 
 
 def draw_graph(auxiliary_matrix):
@@ -53,7 +58,8 @@ def draw_graph(auxiliary_matrix):
 
 def main():
     os.chdir("D:\Linux VM\shared")
-    get_graph(sys.argv[1])
+    for i in range(1, len(sys.argv)):
+        get_graph(sys.argv[i])
 
 
 if __name__ == "__main__":
