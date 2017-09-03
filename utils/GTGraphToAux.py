@@ -1,8 +1,8 @@
 import os
 
 import matplotlib.pyplot as plt
-import networkx as nx
 import numpy as np
+import networkx as nx
 
 
 def to_auxiliary_matrix(gt_graph_file):
@@ -21,6 +21,29 @@ def to_auxiliary_matrix(gt_graph_file):
         row = item[0] - 1
         col = item[1] - 1
         auxiliary[row, col] = 1
+
+    degree_count = np.sum(auxiliary, axis=0, dtype=int)
+
+    degree, count = np.unique(degree_count, return_counts=True)
+
+    x_degree = degree.flatten()
+    y_column = count.flatten()
+
+    plt.title(" Node Degree distribution of a Random Graph n = " + str(nodes_count) + ", p = 0.04 ")
+    plt.xlabel("Node degree")
+    plt.ylabel("Number of nodes")
+    plt.scatter(x_degree, y_column)
+    plt.xscale('log')
+    plt.yscale('log')
+    plt.margins(0.1)
+
+    ax = plt.gca()
+    ax.relim()
+    # update ax.viewLim using the new dataLim
+    ax.autoscale_view()
+
+    plt.show()
+
     return auxiliary
 
 
