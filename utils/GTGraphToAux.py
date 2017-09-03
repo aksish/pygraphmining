@@ -12,7 +12,9 @@ def to_auxiliary_matrix(gt_graph_file):
         meta_line = meta.readline()
         nodes_count = int(meta_line.split(" ")[4])
         print(meta_line)
-        print(meta.readline())
+        meta_line_2 = meta.readline()
+        print(meta_line_2)
+        edge_count = int(meta_line_2.split(" ")[5])
         print(meta.readline())
         print(meta.readline())
 
@@ -29,10 +31,10 @@ def to_auxiliary_matrix(gt_graph_file):
     x_degree = degree.flatten()
     y_column = count.flatten()
 
-    plt.title(" Node Degree distribution of a Random Graph n = " + str(nodes_count) + ", p = 0.04 ")
+    plt.title(" Node Degree distribution of a Random Graph n = " + str(nodes_count) + " m = " + str(edge_count))
     plt.xlabel("Node degree")
     plt.ylabel("Number of nodes")
-    plt.scatter(x_degree, y_column)
+    plt.plot(x_degree, y_column)
     plt.xscale('log')
     plt.yscale('log')
     plt.margins(0.2)
@@ -49,11 +51,12 @@ def to_auxiliary_matrix(gt_graph_file):
 
 def main():
     os.chdir("D:\Linux VM\shared")
-    auxiliary_matrix = to_auxiliary_matrix("assignment2_qsn1.gh")
+    auxiliary_matrix = to_auxiliary_matrix("assignment2_qsn2b.gh")
 
-    G = nx.from_numpy_matrix(auxiliary_matrix)
-    nx.draw_random(G, with_labels=True)
-    plt.show()
+    #Draws Graph
+    # G = nx.from_numpy_matrix(auxiliary_matrix)
+    # nx.draw_random(G, with_labels=True)
+    # plt.show()
 
 
 if __name__ == "__main__":
