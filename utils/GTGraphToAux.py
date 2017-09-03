@@ -11,6 +11,7 @@ def to_auxiliary_matrix(gt_graph_file):
         print(meta.readline())
         meta_line = meta.readline()
         nodes_count = int(meta_line.split(" ")[4])
+        print(meta_line)
         print(meta.readline())
         print(meta.readline())
         print(meta.readline())
