@@ -31,12 +31,14 @@ def to_auxiliary_matrix(gt_graph_file):
     x_degree = degree.flatten()
     y_column = count.flatten()
 
-    plt.title(" Node Degree distribution of a Random Graph n = " + str(nodes_count) + " m = " + str(edge_count))
+    plt.title(" Node Degree distribution of a R-Mat Graph n = " + str(nodes_count) + " m = " + str(edge_count))
     plt.xlabel("Node degree")
     plt.ylabel("Number of nodes")
-    plt.plot(x_degree, y_column)
-    plt.xscale('log')
-    plt.yscale('log')
+    # plt.plot(x_degree, y_column)
+    plt.scatter(x_degree, y_column)
+    plt.yscale('symlog')
+    plt.xscale('symlog')
+    #
     plt.margins(0.2)
 
     # ax = plt.gca()
@@ -51,7 +53,7 @@ def to_auxiliary_matrix(gt_graph_file):
 
 def main():
     os.chdir("D:\Linux VM\shared")
-    auxiliary_matrix = to_auxiliary_matrix("assignment2_qsn2b.gh")
+    auxiliary_matrix = to_auxiliary_matrix("Assignment2_qsn_3d_rmat.gh")
 
     #Draws Graph
     # G = nx.from_numpy_matrix(auxiliary_matrix)
