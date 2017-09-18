@@ -37,7 +37,7 @@ def page_rank_by_power_iteration(decay=0.85):
 
     # Node 1 is a dangling node.
     # We need to handle that.
-    # So we initialized a stochastic distribution of 1 to all nodes as 1/n
+    # So we initialized a stochastic distribution of 1 to all dangling nodes as 1/n
     for i in range(m_matrix.shape[1]):
         col = m_matrix[:, i]
         if np.sum(col) == 0:
