@@ -148,37 +148,37 @@ def inverse_matrix_method_ppr(decay=0.85,query_node=1):
 def main():
     # Just to disable some unnecessary warning
     np.seterr(divide='ignore', invalid='ignore')
-
+    #
     page_rank_by_power_iteration(decay=0.85)
-
-    inverse_matrix_method_pr(decay=0.85)
-
+    #
+    # inverse_matrix_method_pr(decay=0.85)
+    #
     print('-------Personalized Page Rank by Power Iteration method-------')
-    personalized_page_rank_by_power_iteration(query_node=1, decay=0.85)
-    personalized_page_rank_by_power_iteration(query_node=2, decay=0.85)
-    personalized_page_rank_by_power_iteration(query_node=3, decay=0.85)
-    personalized_page_rank_by_power_iteration(query_node=4, decay=0.85)
+    # personalized_page_rank_by_power_iteration(query_node=1, decay=0.85)
+    # personalized_page_rank_by_power_iteration(query_node=2, decay=0.85)
+    # personalized_page_rank_by_power_iteration(query_node=3, decay=0.85)
+    # personalized_page_rank_by_power_iteration(query_node=4, decay=0.85)
     personalized_page_rank_by_power_iteration(query_node=5, decay=0.85)
-    personalized_page_rank_by_power_iteration(query_node=6, decay=0.85)
-    personalized_page_rank_by_power_iteration(query_node=7, decay=0.85)
-    personalized_page_rank_by_power_iteration(query_node=8, decay=0.85)
-    personalized_page_rank_by_power_iteration(query_node=9, decay=0.85)
-    personalized_page_rank_by_power_iteration(query_node=10, decay=0.85)
-    personalized_page_rank_by_power_iteration(query_node=11, decay=0.85)
-
-    print('-------Personalized Page Rank by Matrix Inverse method-------')
-    inverse_matrix_method_ppr(query_node=1, decay=0.85)
-    inverse_matrix_method_ppr(query_node=2, decay=0.85)
-    inverse_matrix_method_ppr(query_node=3, decay=0.85)
-    inverse_matrix_method_ppr(query_node=4, decay=0.85)
-    inverse_matrix_method_ppr(query_node=5, decay=0.85)
-    inverse_matrix_method_ppr(query_node=6, decay=0.85)
-    inverse_matrix_method_ppr(query_node=7, decay=0.85)
-    inverse_matrix_method_ppr(query_node=8, decay=0.85)
-    inverse_matrix_method_ppr(query_node=9, decay=0.85)
-    inverse_matrix_method_ppr(query_node=10, decay=0.85)
-    inverse_matrix_method_ppr(query_node=11, decay=0.85)
-
+    # personalized_page_rank_by_power_iteration(query_node=6, decay=0.85)
+    # personalized_page_rank_by_power_iteration(query_node=7, decay=0.85)
+    # personalized_page_rank_by_power_iteration(query_node=8, decay=0.85)
+    # personalized_page_rank_by_power_iteration(query_node=9, decay=0.85)
+    # personalized_page_rank_by_power_iteration(query_node=10, decay=0.85)
+    # personalized_page_rank_by_power_iteration(query_node=11, decay=0.85)
+    # #
+    # print('-------Personalized Page Rank by Matrix Inverse method-------')
+    # inverse_matrix_method_ppr(query_node=1, decay=0.85)
+    # inverse_matrix_method_ppr(query_node=2, decay=0.85)
+    # inverse_matrix_method_ppr(query_node=3, decay=0.85)
+    # inverse_matrix_method_ppr(query_node=4, decay=0.85)
+    # inverse_matrix_method_ppr(query_node=5, decay=0.85)
+    # inverse_matrix_method_ppr(query_node=6, decay=0.85)
+    # inverse_matrix_method_ppr(query_node=7, decay=0.85)
+    # inverse_matrix_method_ppr(query_node=8, decay=0.85)
+    # inverse_matrix_method_ppr(query_node=9, decay=0.85)
+    # inverse_matrix_method_ppr(query_node=10, decay=0.85)
+    # inverse_matrix_method_ppr(query_node=11, decay=0.85)
+    # #/
 
 if __name__ == '__main__':
     main()

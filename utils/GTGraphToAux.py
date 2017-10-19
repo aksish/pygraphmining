@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import networkx as nx
 import sys
+import utils.SpiderSolatire as sp
 
 
 def get_graph(gt_graph_file):
@@ -46,7 +47,8 @@ def save_degree_distribution(auxiliary_matrix, image_file_name, nodes_count, edg
     plt.yscale('symlog')
     plt.xscale('symlog')
     plt.margins(0.2)
-    plt.savefig(image_file_name)
+    # plt.savefig(image_file_name)
+    plt.show();
     plt.close()
 
 
@@ -64,3 +66,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
