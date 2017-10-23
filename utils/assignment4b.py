@@ -1,49 +1,52 @@
 import os
-import networkx as nx
 
 import numpy as np
-import matplotlib.pyplot as plt
+import scipy as sp
 from sklearn.cluster import KMeans
 
-def get_color(i):
-    if i==0:
-        return "red"
-    if i==1:
-        return "green"
-    if i==2:
-        return "blue"
-    if i==3:
-        return "black"
+os.chdir('D:\idea projects\pycharm projects\pygraph')
+
+data1 = np.loadtxt('dataset/Dataset2Edges.txt')
+node_pos = np.loadtxt('dataset/Dataset2Nodes_Layout.txt')
+
+import networkx as nx
+
+graph = nx.from_edgelist(data1)
+
+# In[72]:
 
 
-def graphToEdgeMatrix(G):
+laplacian1 = nx.laplacian_matrix(graph)
 
-    edgeMat = [[0 for x in range(len(G))] for y in range(len(G))]
-    for node in G:
-        tempNeighList = G.neighbors(node)
-        for neighbor in tempNeighList:
-            edgeMat[node][neighbor] = 1
-        edgeMat[node][node] = 1
+import matplotlib.pyplot as plt
 
-    return edgeMat
-    plt.scatter()
+nx.draw_networkx(graph, with_labels=False, node_size=10, width=.3)
+plt.show()
 
-def main():
-    os.chdir("D:\idea projects\pycharm projects\pygraph\dataset")
-    dataset = np.loadtxt("Dataset2Edges.txt")
-    graph = nx.from_edgelist(dataset)
-    graph = nx.convert_node_labels_to_integers(graph)
-    edgeMMatrix = graphToEdgeMatrix(graph)
-    cluster_map = nx.clustering(graph)
-    a
-    coffs = []
-    for i in sorted(cluster_map):
-        coffs.append([1, cluster_map.get(i)])
-    print(coffs)
-    partition = KMeans(n_clusters=4, precompute_distances=True).fit(coffs)
-    nx.draw_networkx(graph,node_color=list((get_color(x) for x in partition.labels_)),with_labels=False)
-    plt.show()
+eig, eiv = sp.linalg.eigh(laplacian1.todense())
+
+x = np.column_stack((eiv[:, 1], eiv[:, 2]))
+kmeans = KMeans(n_clusters=4).fit(x)
+labels = kmeans.labels_
 
 
-if __name__ == '__main__':
-    main()
+def getlbl(i):
+    color = ""
+    if i == 0:
+        color = 'red'
+    elif i == 1:
+        color = 'blue'
+    elif i == 2:
+        color = 'green'
+    elif i == 3:
+        color = 'yellow'
+    return color
+
+
+nx.draw_spectral(graph, node_color=list((getlbl(i) for i in labels)), with_labels=False, width=0.5, node_size=50)
+plt.show()
+
+
+plt.grid(True)
+plt.scatter(eiv[:, 1], eiv[:, 2], c=list((getlbl(i) for i in labels)))
+plt.show()
